@@ -1,21 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
-	private int count;
+
 	private Rigidbody rb;
-	public Text countText;
-	public Text winText;
 
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
-		count = 0;
-		setCountText();
-		winText.text = "";
 	}
 
 	void FixedUpdate ()
@@ -25,21 +19,22 @@ public class PlayerController : MonoBehaviour {
 
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
-		rb.AddForce (movement * speed);
-	}
-
-	void setCountText()
-	{
-		countText.text = "Count: " + count.ToString ();
-		if (count >= 12)
-			winText.text = "You Win!";
-	}
-	void OnTriggerEnter(Collider other) 
-	{
-		if (other.gameObject.CompareTag ("Pick Up")) {
-			other.gameObject.SetActive (false);
-			count++;
-			setCountText ();
-		}
+        if (Input.GetKey(KeyCode.UpArrow))//up
+        {
+            rb.AddForce(movement * speed);
+        }
+        if (Input.GetKey(KeyCode.DownArrow))//down
+        {
+            rb.AddForce(movement * speed);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))//left
+        {
+            rb.AddForce(movement * speed);
+        }
+        if (Input.GetKey(KeyCode.RightArrow))//right
+        {
+            rb.AddForce(movement * speed);
+        }
+        
 	}
 }
